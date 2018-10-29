@@ -84,32 +84,32 @@ public class NGSISTHSink extends NGSIMongoBaseSink {
             return;
         } // if
  
-        // Iterate on the destinations
-        batch.startIterator();
-        
-        while (batch.hasNext()) {
-            String destination = batch.getNextDestination();
-            LOGGER.debug("[" + this.getName() + "] Processing sub-batch regarding the "
-                    + destination + " destination");
+        //// Iterate on the destinations
+        //batch.startIterator();
+        //
+        //while (batch.hasNext()) {
+        //    String destination = batch.getNextDestination();
+        //    LOGGER.debug("[" + this.getName() + "] Processing sub-batch regarding the "
+        //            + destination + " destination");
 
-            // Get the events within the current sub-batch
-            ArrayList<NGSIEvent> events = batch.getNextEvents();
-            
-            // Get an aggregator for this destination and initialize it
-            STHAggregator aggregator = new STHAggregator();
-            aggregator.initialize(events.get(0));
+        //    // Get the events within the current sub-batch
+        //    ArrayList<NGSIEvent> events = batch.getNextEvents();
+        //    
+        //    // Get an aggregator for this destination and initialize it
+        //    STHAggregator aggregator = new STHAggregator();
+        //    aggregator.initialize(events.get(0));
 
-            // Iterate on the events within the sub-batch and aggregate them
-            for (NGSIEvent event : events) {
-                aggregator.aggregate(event);
-            } // for
-            
-            // Persist the aggregation
-            aggregator.persist(this.getName());
-            
-            // Set the sub-batch as persisted
-            batch.setNextPersisted(true);
-        } // for
+        //    // Iterate on the events within the sub-batch and aggregate them
+        //    for (NGSIEvent event : events) {
+        //        aggregator.aggregate(event);
+        //    } // for
+        //    
+        //    // Persist the aggregation
+        //    aggregator.persist(this.getName());
+        //    
+        //    // Set the sub-batch as persisted
+        //    batch.setNextPersisted(true);
+        //} // for
     } // persistBatch
     
     @Override
